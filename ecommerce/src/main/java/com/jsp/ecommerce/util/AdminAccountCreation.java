@@ -39,14 +39,18 @@ public class AdminAccountCreation implements CommandLineRunner {
 			if(userRepository.existsByEmail(adminEmail)) {
 				log.info("Admin Account Alerady Exists");
 			}else {
-				User user=new User();
-				user.setActive(true);
-				user.setEmail(adminEmail);
-				user.setMobile(adminMobile);
-				user.setUsername(adminUserName);
+//				User user=new User();{in case of setters and getters}
+//				user.setActive(true);
+//				user.setEmail(adminEmail);
+//				user.setMobile(adminMobile);
+//				user.setUsername(adminUserName);
+//				
+//				user.setPassword(passwordEncoder.encode(adminPassword));
+//				user.setRole(UserRole.ADMIN);
+//				
 				
-				user.setPassword(passwordEncoder.encode(adminPassword));
-				user.setRole(UserRole.ADMIN);
+				User user = new User(null, adminUserName, adminEmail, adminMobile, passwordEncoder.encode(adminPassword),
+						UserRole.ADMIN, true);
 				userRepository.save(user);
 				log.info("Admin Account Creaion Success - " + adminUserName);
 				
